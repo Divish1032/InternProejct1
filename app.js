@@ -37,11 +37,12 @@ var query=null;
        request(url,function(error,response,body){
            if(!error&&response.statusCode==200){
                var apidata=JSON.parse(body);
-               console.log("============");
-               console.log(apidata["rows"][0]["elements"][0]["distance"]["text"]);
-               
+               if(apidata["rows"][0]["elements"][0]["status"]=="ZERO_RESULTS"){
+                   console.log("error")
+               }
+               else{
                property['dist']=apidata["rows"][0]["elements"][0]["distance"]["text"];
-            
+               }
            
        
       }
@@ -52,7 +53,7 @@ var query=null;
       
       });
        
-      console.log("*********");
+      
     res.redirect("/search");
    
  });

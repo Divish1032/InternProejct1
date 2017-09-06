@@ -20,7 +20,7 @@
 		<form action="/search" method="POST">
 			<div class="form-group">
 				<label for="exampleInputlocation">Location</label>
-			    <input type="text" class="form-control" <% if(query!=null){ %> value="<%= query %>" <% } %> name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder="  Name of Place or Lat & Long">
+			    <input type="text" class="form-control" <% if(query!=null){ %> value="<%= query %>" <% } %> name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder="  Name of Place or Lat & Long" readonly>
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
 			
