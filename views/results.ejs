@@ -14,25 +14,26 @@
   	
 </head>
 <body>
-	<% var i,j;	if(data1[0]['dist']!="0"){		for(j=0;j<5;j++){			var num="";			var n= data1[j]['dist'].indexOf(" ");			for(i=0;i<n;i++){				if(data1[j]['dist'][i]!=",")				num = num+data1[j]['dist'][i];			}		data1[j]['dist']=Number(num);		}	} %> 
+	<% var i,j;	if(data1[0]['dist']!="0" && typeof(data1[0]['dist'])=="string" ){		for(j=0;j<5;j++){			var num="";			var n= data1[j]['dist'].indexOf(" ");			for(i=0;i<n;i++){				if(data1[j]['dist'][i]!=",")				num = num+data1[j]['dist'][i];			}		data1[j]['dist']=Number(num);		}	} %> 
 	
 
-	<div  class="container">
+	<div  class="container ">
 		<h1>Property Finder</h1>
-		<h2>Enter Your Location</h2>
-		<form action="/search" method="GET">
+		<h2>Your Location</h2>
+		<form class="clearfix" action="/search" method="GET">
 			<div class="form-group">
 				<label for="exampleInputlocation">Location</label>
 			    <input type="text" class="form-control"  <% if(query!=null){ %> value="<%= query %>" <% } %>  name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder="  Name of Place or Lat & Long" readonly>
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
 		<button type="submit" class="btn btn-primary">Reload</button>
+		<a href="/" ><button type="button" class=" float-right btn btn-outline-secondary">Reset</button></a>
 		</form>
-		
-		
+		<h3>Or</h3>
+		<h3>To Compare Two Locations </h3>
 		<form action="/compare" method="POST">
 			<div class="form-group">
-				<label for="autocomplete">Location</label>
+				<label for="autocomplete">Enter Location 2</label>
 			    <input type="text"  onFocus="geolocate()" class="form-control"  name="currentlocation2" id="autocomplete" aria-describedby="emailHelp" placeholder="Enter your address">
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
@@ -65,9 +66,6 @@
    			 	<% }) %>
 	        </tbody>
 	    </table>
-	    <br>
-	    <br>
-	    <a href="/">Search For Another Loaction</div>
 	</div>
 	<script>
 		 var placeSearch, autocomplete;

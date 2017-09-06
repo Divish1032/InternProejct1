@@ -14,13 +14,13 @@
   	
 </head>
 <body>
-	<% var i,j;	if(data1[0]['dist2']!="0"){		for(j=0;j<5;j++){			var num="";			var n= data1[j]['dist2'].indexOf(" ");			for(i=0;i<n;i++){				if(data1[j]['dist2'][i]!=",")				num = num+data1[j]['dist2'][i];			}		data1[j]['dist2']=Number(num);		}	} %> 
+	<% var i,j;	if(data1[0]['dist2']!="0" && typeof(data1[0]['dist2'])=="string"){		for(j=0;j<5;j++){			var num="";			var n= data1[j]['dist2'].indexOf(" ");			for(i=0;i<n;i++){				if(data1[j]['dist2'][i]!=",")				num = num+data1[j]['dist2'][i];			}		data1[j]['dist2']=Number(num);		}	} %> 
 	
 
 	<div  class="container">
 		<h1>Property Finder</h1>
-		<h2>Enter Your Location</h2>
-		<form action="/compare" method="GET">
+		<h2>Your Location</h2>
+		<form class="clearfix" action="/compare" method="GET">
 			<div class="form-group">
 				<label for="exampleInputlocation">Location 1</label>
 			    <input type="text" class="form-control"  <% if(query!=null){ %> value="<%= query %>" <% } %>  name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder="  Name of Place or Lat & Long" readonly>
@@ -32,6 +32,7 @@
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
 			<button type="submit" class="btn btn-primary">Reload</button>
+			<a href="/" ><button type="button" class=" float-right btn btn-outline-secondary">Reset</button></a>
 		</form>
 		
 		
@@ -43,10 +44,11 @@
 	                <th>Price (in Rs.)</th>
 	                <th>Location</th>
 	                <%if(data1[4]["dist"]!="0"||data1[2]["dist"]!="0"||data1[1]["dist"]!="0"||data1[0]["dist"]!="0"){ %>
-    					<th>Distance (in Km) 1</th>
+    					<th>Distance (in Km) <br> <small id="Help" class="form-text text-muted">From Location 1</small></th>
 	    			<% }%>
 	    			<%if(data1[4]["dist2"]!="0"||data1[2]["dist2"]!="0"||data1[1]["dist2"]!="0"||data1[0]["dist2"]!="0"){ %>
-    					<th>Distance (in Km) 2</th>
+    					<th>Distance (in Km)  <br> <small id="Help" class="form-text text-muted">From Location 2</small> </th>
+    					
 	    			<% }%>
 	            </tr>
 	        </thead>
@@ -67,9 +69,7 @@
    			 	<% }) %>
 	        </tbody>
 	    </table>
-	    <br>
-	    <br>
-	    <a href="/">Search For Another Loaction</div>
+	   
 	</div>
 	<script>
 		 $(document).ready(function() {

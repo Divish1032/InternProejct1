@@ -9,20 +9,20 @@ var request=require("request");
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
 var data=[
-       {name:"Property 1",area:"450 sq.feet",cost:1102,location:"Rajajipuram Lucknow",dist:"0",dist2:"0"},
-       {name:"Property 2",area:"860 sq.feet",cost:1520,location:"Lanka Varanasi",dist:"0",dist2:"0"},
-       {name:"Property 3",area:"665 sq.feet",cost:800,location:"Rana Pratap Bagh Delhi",dist:"0",dist2:"0"},
-       {name:"Property 4",area:"1350 sq.feet",cost:456,location:"Andheri East Mumbai",dist:"0",dist2:"0"},
-       {name:"Property 5",area:"1620 sq.feet",cost:2105,location:"Victoria Memorial Hall Kolkata",dist:"0",dist2:"0"}
+       {name:"Property 1",area:450,cost:1102,location:"Rajajipuram Lucknow",dist:"0",dist2:"0"},
+       {name:"Property 2",area:860,cost:1520,location:"Lanka Varanasi",dist:"0",dist2:"0"},
+       {name:"Property 3",area:665,cost:800,location:"Rana Pratap Bagh Delhi",dist:"0",dist2:"0"},
+       {name:"Property 4",area:1350,cost:456,location:"Andheri East Mumbai",dist:"0",dist2:"0"},
+       {name:"Property 5",area:1620,cost:2105,location:"Victoria Memorial Hall Kolkata",dist:"0",dist2:"0"}
          ];
 
  app.get("/",function(req, res) {
      data=[
-       {name:"Property 1",area:"450 sq.feet",cost:1102,location:"Rajajipuram Lucknow",dist:"0",dist2:"0"},
-       {name:"Property 2",area:"860 sq.feet",cost:1520,location:"Lanka Varanasi",dist:"0",dist2:"0"},
-       {name:"Property 3",area:"665 sq.feet",cost:800,location:"Rana Pratap Bagh Delhi",dist:"0",dist2:"0"},
-       {name:"Property 4",area:"1350 sq.feet",cost:456,location:"Andheri East Mumbai",dist:"0",dist2:"0"},
-       {name:"Property 5",area:"1620 sq.feet",cost:2105,location:"Victoria Memorial Hall Kolkata",dist:"0",dist2:"0"}
+        {name:"Property 1",area:450,cost:1102,location:"Rajajipuram Lucknow",dist:"0",dist2:"0"},
+       {name:"Property 2",area:860,cost:1520,location:"Lanka Varanasi",dist:"0",dist2:"0"},
+       {name:"Property 3",area:665,cost:800,location:"Rana Pratap Bagh Delhi",dist:"0",dist2:"0"},
+       {name:"Property 4",area:1350,cost:456,location:"Andheri East Mumbai",dist:"0",dist2:"0"},
+       {name:"Property 5",area:1620,cost:2105,location:"Victoria Memorial Hall Kolkata",dist:"0",dist2:"0"}
          ];
      res.render("search",{data1:data,query:query});
      
