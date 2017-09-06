@@ -4,7 +4,12 @@
 	<link rel="stylesheet" type="text/css" href="/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByHUY8tGxwZHprJhVbJ6ddS066__4DXos&libraries=places"></script>
+	<script type="text/javascript" src="/jquery.js"></script>
+	 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
 
@@ -13,29 +18,65 @@
 		<h2>Enter Your Location</h2>
 		<form action="/search" method="POST">
 			<div class="form-group">
-				<label for="exampleInputlocation">Location</label>
-			    <input type="text" class="form-control"  name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder=" Name of Place or Lat & Long">
+				<label for="autocomplete">Location</label>
+			    <input type="text"  onFocus="geolocate()" class="form-control"  name="currentlocation" id="autocomplete" aria-describedby="emailHelp" placeholder="Enter your address">
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
-			
-			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
-		<div class="row">
-			<div class="col-md-3">Name</div>
-			<div class="col-md-3">Area (sq.feet)</div>
-			<div class="col-md-3">Price (in Rs.)</div>
-			<div class="col-md-3">Location</div>
-		</div>
-		<% data1.forEach(function(property) { %>
-    		<div class="row">
-    			<div class="col-md-3"><%= property["name"] %></div>
-    			<div class="col-md-3"><%= property["area"] %> </div>
-    			<div class="col-md-3"><%= property["cost"] %></div>
-    			<div class="col-md-3"><%= property["location"] %></div>
-    			
-    		</div>
-	    <% }) %>
-	</div>
+		
+	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Area (sq.feet)</th>
+                <th>Price (in Rs.)</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+		<tbody>
+			<% data1.forEach(function(property) { %>
+	            <tr>
+	                <td><%= property["name"] %></td>
+	                <td><%= property["area"] %></td>
+	                <td><%= property["cost"] %></td>
+	                <td><%= property["location"] %></td>
+	            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+	<script>
+      var placeSearch, autocomplete;
+      function initAutocomplete() { 
+        autocomplete = new google.maps.places.Autocomplete(
+            (document.getElementById('autocomplete')),
+            {types: ['geocode']});
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+       function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        $('form').submit();
+      }
+       $(document).ready(function() {
+		    $('#example').DataTable();
+		} );
+    </script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVkyLnYRqJ4mpImuUdWt6EABnh0zrDHzY&libraries=places&callback=initAutocomplete"
+        async defer></script>
 	
 </body>
 </html>
