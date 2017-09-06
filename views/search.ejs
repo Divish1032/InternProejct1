@@ -1,0 +1,41 @@
+<!DOCTYPE <html>
+<head>
+	<title>Project</title>
+	<link rel="stylesheet" type="text/css" href="/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+	<div  class="container">
+		<h1>Property Finder</h1>
+		<h2>Enter Your Location</h2>
+		<form action="/search" method="POST">
+			<div class="form-group">
+				<label for="exampleInputlocation">Location</label>
+			    <input type="text" class="form-control"  name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder=" Name of Place or Lat & Long">
+			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		<div class="row">
+			<div class="col-md-3">Name</div>
+			<div class="col-md-3">Area (sq.feet)</div>
+			<div class="col-md-3">Price (in Rs.)</div>
+			<div class="col-md-3">Location</div>
+		</div>
+		<% data1.forEach(function(property) { %>
+    		<div class="row">
+    			<div class="col-md-3"><%= property["name"] %></div>
+    			<div class="col-md-3"><%= property["area"] %> </div>
+    			<div class="col-md-3"><%= property["cost"] %></div>
+    			<div class="col-md-3"><%= property["location"] %></div>
+    			
+    		</div>
+	    <% }) %>
+	</div>
+	
+</body>
+</html>
