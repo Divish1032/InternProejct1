@@ -12,10 +12,10 @@
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
-
 	<div  class="container">
 		<h1>Property Finder</h1>
 		<h2>Enter Your Location</h2>
+		
 		<form action="/search" method="POST">
 			<div class="form-group">
 				<label for="autocomplete">Location</label>
@@ -24,26 +24,28 @@
 			</div>
 		</form>
 		
-	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Area (sq.feet)</th>
-                <th>Price (in Rs.)</th>
-                <th>Location</th>
-            </tr>
-        </thead>
-		<tbody>
-			<% data1.forEach(function(property) { %>
+		<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	        <thead>
 	            <tr>
-	                <td><%= property["name"] %></td>
-	                <td><%= property["area"] %></td>
-	                <td><%= property["cost"] %></td>
-	                <td><%= property["location"] %></td>
+	                <th>Name</th>
+	                <th>Area (sq.feet)</th>
+	                <th>Price (in Rs.)</th>
+	                <th>Location</th>
 	            </tr>
-            <% }) %>
-        </tbody>
-    </table>
+	        </thead>
+			<tbody>
+				<% data1.forEach(function(property) { %>
+		            <tr>
+		                <td><%= property["name"] %></td>
+		                <td><%= property["area"] %></td>
+		                <td><%= property["cost"] %></td>
+		                <td><%= property["location"] %></td>
+		            </tr>
+	            <% }) %>
+	        </tbody>
+	    </table>
+	</div>
+	 
 	<script>
       var placeSearch, autocomplete;
       function initAutocomplete() { 
@@ -75,8 +77,6 @@
 		    $('#example').DataTable();
 		} );
     </script>
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVkyLnYRqJ4mpImuUdWt6EABnh0zrDHzY&libraries=places&callback=initAutocomplete"
-        async defer></script>
-	
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVkyLnYRqJ4mpImuUdWt6EABnh0zrDHzY&libraries=places&callback=initAutocomplete" async defer>    </script>
 </body>
 </html>

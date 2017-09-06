@@ -6,14 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script  src="https://code.jquery.com/jquery-3.2.1.slim.js"  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="  crossorigin="anonymous"></script>
-
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
    	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>  
-  	
 </head>
 <body>
+    	<!--For Converting String values into Number type-->
 	<% var i,j;	if(data1[0]['dist2']!="0" && typeof(data1[0]['dist2'])=="string"){		for(j=0;j<5;j++){			var num="";			var n= data1[j]['dist2'].indexOf(" ");			for(i=0;i<n;i++){				if(data1[j]['dist2'][i]!=",")				num = num+data1[j]['dist2'][i];			}		data1[j]['dist2']=Number(num);		}	} %> 
 	
 
@@ -23,14 +22,23 @@
 		<form class="clearfix" action="/compare" method="GET">
 			<div class="form-group">
 				<label for="exampleInputlocation">Location 1</label>
-			    <input type="text" class="form-control"  <% if(query!=null){ %> value="<%= query %>" <% } %>  name="currentlocation" id="exampleInputlocation" aria-describedby="emailHelp" placeholder="  Name of Place or Lat & Long" readonly>
+			    <input type="text" class="form-control" name="currentlocation" id="exampleInputlocation" placeholder="  Name of Place or Lat & Long" readonly
+    			    <% if(query!=null){ %>
+    			    value="<%= query %>"
+    			    <% } %> 
+    			 >
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
 			<div>
 				<label for="autocomplete">Location 2</label>
-			    <input type="text" <% if(query2!=null){ %> value="<%= query2 %>" <% } %> class="form-control"  name="currentlocation" id="autocomplete" aria-describedby="emailHelp" placeholder="Enter your address" readonly>
+			    <input type="text" class="form-control"  name="currentlocation" id="autocomplete"  placeholder="Enter your address" readonly
+    			    <% if(query2!=null){ %> 
+    			    value="<%= query2 %>"
+    			    <% } %>
+			     >
 			    <small id="Help" class="form-text text-muted">Calculate the distance between your location and the given property</small>
 			</div>
+			
 			<button type="submit" class="btn btn-primary">Reload</button>
 			<a href="/" ><button type="button" class=" float-right btn btn-outline-secondary">Reset</button></a>
 		</form>
@@ -48,7 +56,6 @@
 	    			<% }%>
 	    			<%if(data1[4]["dist2"]!="0"||data1[2]["dist2"]!="0"||data1[1]["dist2"]!="0"||data1[0]["dist2"]!="0"){ %>
     					<th>Distance (in Km)  <br> <small id="Help" class="form-text text-muted">From Location 2</small> </th>
-    					
 	    			<% }%>
 	            </tr>
 	        </thead>
@@ -69,14 +76,11 @@
    			 	<% }) %>
 	        </tbody>
 	    </table>
-	   
 	</div>
 	<script>
 		 $(document).ready(function() {
 		    $('#example').DataTable();
 		} );
 	</script>
-	
-	
 </body>
 </html>
