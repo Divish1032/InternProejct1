@@ -83,6 +83,10 @@ function apicollect(){
         }
      });
    });
+   
+   
+   	 var i,j;	if(data[0]['dist']!="0" && typeof(data[0]['dist'])=="string" ){		for(j=0;j<5;j++){			var num="";			var n= data[j]['dist'].indexOf(" ");			for(i=0;i<n;i++){				if(data[j]['dist'][i]!=",")				num = num+data[j]['dist'][i];			}		data[j]['dist']=Number(num);		}	}  
+
 }
 
 
